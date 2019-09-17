@@ -1,5 +1,6 @@
 Flask
 =====
+This Project is clone from  `pallets_flask`_ ,it aims to self learning.
 
 Flask is a lightweight `WSGI`_ web application framework. It is designed
 to make getting started quick and easy, with the ability to scale up to
@@ -78,3 +79,4 @@ Links
 .. _Werkzeug: https://www.palletsprojects.com/p/werkzeug/
 .. _Jinja: https://www.palletsprojects.com/p/jinja/
 .. _pip: https://pip.pypa.io/en/stable/quickstart/
+.. _pallets_flask: https://github.com/pallets/flask/

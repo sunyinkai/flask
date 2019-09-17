@@ -200,11 +200,11 @@ class Flask(_PackageBoundObject):
 
     #: The class that is used for request objects.  See :class:`~flask.Request`
     #: for more information.
-    request_class = Request
+    request_class = Request  # 设置请求的类型
 
     #: The class that is used for response objects.  See
     #: :class:`~flask.Response` for more information.
-    response_class = Response
+    response_class = Response # 设置响应的类型
 
     #: The class that is used for the Jinja environment.
     #:
@@ -440,7 +440,7 @@ class Flask(_PackageBoundObject):
         #: be function names which are also used to generate URLs and
         #: the values are the function objects themselves.
         #: To register a view function, use the :meth:`route` decorator.
-        self.view_functions = {}
+        self.view_functions = {}  # 注册所有的视图函数,url  ----> functions
 
         #: A dictionary of all registered error handlers.  The key is ``None``
         #: for error handlers active on the application, otherwise the key is
@@ -475,7 +475,7 @@ class Flask(_PackageBoundObject):
         #: :meth:`before_first_request` decorator.
         #:
         #: .. versionadded:: 0.8
-        self.before_first_request_funcs = []
+        self.before_first_request_funcs = []  # 请求钩子
 
         #: A dictionary with lists of functions that should be called after
         #: each request.  The key of the dictionary is the name of the blueprint
@@ -945,6 +945,7 @@ class Flask(_PackageBoundObject):
         """
         # Change this into a no-op if the server is invoked from the
         # command line. Have a look at cli.py for more information.
+        # 以上基本是在配置参数,然后启用simple_run 方法
         if os.environ.get("FLASK_RUN_FROM_CLI") == "true":
             from .debughelpers import explain_ignored_app_run
 
@@ -2402,7 +2403,7 @@ class Flask(_PackageBoundObject):
         finally:
             builder.close()
 
-    def wsgi_app(self, environ, start_response):
+    def wsgi_app(self, environ, start_response):  # 请求处理的过程
         """The actual WSGI application. This is not implemented in
         :meth:`__call__` so that middlewares can be applied without
         losing a reference to the app object. Instead of doing this::
@@ -2427,12 +2428,12 @@ class Flask(_PackageBoundObject):
             a list of headers, and an optional exception context to
             start the response.
         """
-        ctx = self.request_context(environ)
+        ctx = self.request_context(environ)  # 建立一个请求上下文对象
         error = None
         try:
             try:
                 ctx.push()
-                response = self.full_dispatch_request()
+                response = self.full_dispatch_request()  # 对这个请求进行分发
             except Exception as e:
                 error = e
                 response = self.handle_exception(e)
